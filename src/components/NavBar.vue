@@ -22,23 +22,39 @@
           tabindex="0"
           class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
-          <li><a>Item 1</a></li>
-          <li>
+          <li index="/demo">
+            <a>{{ $t('menu.public') }}</a>
+          </li>
+          <li index="/folder">
+            <a>{{ $t('menu.folder') }}</a>
+          </li>
+          <li index="/about">
+            <a>{{ $t('menu.about') }}</a>
+          </li>
+          <!-- <li>
             <a>Parent</a>
             <ul class="p-2">
               <li><a>Submenu 1</a></li>
               <li><a>Submenu 2</a></li>
             </ul>
           </li>
-          <li><a>Item 3</a></li>
+          <li><a>Item 3</a></li> -->
         </ul>
       </div>
-      <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+      <a class="btn btn-ghost normal-case text-xl">Mind Elixir</a>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><a>Item 1</a></li>
-        <li tabindex="0">
+        <li>
+          <router-link to="/list/public">{{ $t('menu.public') }}</router-link>
+        </li>
+        <li> 
+          <router-link to="/list/map">{{ $t('menu.folder') }}</router-link>
+        </li>
+        <li>
+          <router-link to="/about">{{ $t('menu.about') }}</router-link>
+        </li>
+        <!-- <li tabindex="0">
           <details>
             <summary>Parent</summary>
             <ul class="p-2">
@@ -47,7 +63,7 @@
             </ul>
           </details>
         </li>
-        <li><a>Item 3</a></li>
+        <li><a>Item 3</a></li> -->
       </ul>
     </div>
     <div class="navbar-end">
@@ -55,3 +71,4 @@
     </div>
   </div>
 </template>
+<script setup lang="ts"></script>
