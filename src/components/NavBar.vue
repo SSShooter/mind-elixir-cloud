@@ -41,14 +41,16 @@
           <li><a>Item 3</a></li> -->
         </ul>
       </div>
-      <a class="btn btn-ghost normal-case text-xl">Mind Elixir</a>
+      <router-link class="btn btn-ghost normal-case text-xl" to="/">
+        Mind Elixir
+      </router-link>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li>
           <router-link to="/list/public">{{ $t('menu.public') }}</router-link>
         </li>
-        <li> 
+        <li>
           <router-link to="/list/map">{{ $t('menu.folder') }}</router-link>
         </li>
         <li>
@@ -67,8 +69,9 @@
       </ul>
     </div>
     <div class="navbar-end">
-      <a class="btn">Button</a>
+      <!-- teleport dest -->
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>

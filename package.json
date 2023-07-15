@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mind-elixir/node-menu": "^1.0.2",
+    "@mind-elixir/node-menu": "^1.0.3",
     "axios": "^1.4.0",
     "mind-elixir": "^2.0.5",
     "vue": "^3.3.4",

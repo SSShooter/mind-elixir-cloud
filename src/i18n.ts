@@ -1,4 +1,6 @@
-export default {
+import { createI18n } from 'vue-i18n'
+
+const messages = {
   en: {
     misc: {
       pleaseLogin: 'Please login first',
@@ -96,3 +98,11 @@ export default {
     },
   },
 }
+const i18n = createI18n({
+  legacy: false,
+  locale: 'en', // set locale
+  fallbackLocale: 'en', // set fallback locale
+  messages, 
+})
+
+export default i18n

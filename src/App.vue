@@ -1,5 +1,16 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import NavBar from './components/NavBar.vue'
+import connect from '@/connect'
+
+onMounted(async () => {
+  const res = await connect.get('/api/user')
+  if (res.data && res.data.id) {
+    // isLogined = true
+    // userData = res.data
+    console.log(res.data)
+  }
+})
 </script>
 
 <template>

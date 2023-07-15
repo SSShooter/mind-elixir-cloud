@@ -53,15 +53,6 @@ import ReadMe from 'mind-elixir/readme.md'
   font-weight: bold;
   margin-bottom: 25px;
 }
-.md {
-  width: 100%;
-  /deep/ img {
-    max-width: 100%;
-  }
-  /deep/ a {
-    color: #ff5656;
-  }
-}
 .list {
   margin: 20px 0;
 }

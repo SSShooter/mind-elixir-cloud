@@ -6,7 +6,7 @@ export interface MindMapItem {
   date: string
   name: string
   origin: string
-  public: true
+  public: boolean
   updatedAt: string
   __v: number
   _id: string
