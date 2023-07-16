@@ -36,7 +36,6 @@ watchEffect(() => {
     isInit = true
     return
   }
-  me.value.refresh(props.data)
 })
 defineExpose({
   instance: me,
