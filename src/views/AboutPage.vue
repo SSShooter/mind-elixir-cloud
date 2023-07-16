@@ -15,7 +15,7 @@
     <p class="list">{{ $t("about['1']") }}</p>
     <p class="list">{{ $t("about['2']") }}</p>
     <p class="list">{{ $t("about['3']") }}</p>
-    <div class="donate">
+    <!-- <div class="donate">
       <span class="coffee">
         <span class="iconfont">&#xe608;</span> Donate
       </span>
@@ -38,7 +38,7 @@
           <span class="iconfont">&#xea24;</span>
         </el-button>
       </a>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup lang="ts">
