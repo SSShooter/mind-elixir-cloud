@@ -8,7 +8,7 @@
   />
   <Teleport to=".navbar-end">
     <button class="btn" @click="save">
-      {{ $t('button.save') }}
+      {{ t('button.save') }}
     </button>
   </Teleport>
 </template>
@@ -23,6 +23,9 @@ import { MindMapItem } from '@/models/list'
 import nodeMenu from '@mind-elixir/node-menu'
 import '@mind-elixir/node-menu/dist/style.css'
 
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 const plugins = [nodeMenu]
 const route = useRoute()
 const meEl = ref<InstanceType<typeof MindElixirVue> | null>(null)

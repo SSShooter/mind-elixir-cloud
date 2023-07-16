@@ -23,13 +23,13 @@
           class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li index="/demo">
-            <a>{{ $t('menu.public') }}</a>
+            <a>{{ t('menu.public') }}</a>
           </li>
           <li index="/folder">
-            <a>{{ $t('menu.folder') }}</a>
+            <a>{{ t('menu.folder') }}</a>
           </li>
           <li index="/about">
-            <a>{{ $t('menu.about') }}</a>
+            <a>{{ t('menu.about') }}</a>
           </li>
           <!-- <li>
             <a>Parent</a>
@@ -48,13 +48,13 @@
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li>
-          <router-link to="/list/public">{{ $t('menu.public') }}</router-link>
+          <router-link to="/list/public">{{ t('menu.public') }}</router-link>
         </li>
         <li>
-          <router-link to="/list/map">{{ $t('menu.folder') }}</router-link>
+          <router-link to="/list/map">{{ t('menu.folder') }}</router-link>
         </li>
         <li>
-          <router-link to="/about">{{ $t('menu.about') }}</router-link>
+          <router-link to="/about">{{ t('menu.about') }}</router-link>
         </li>
         <!-- <li tabindex="0">
           <details>
@@ -74,4 +74,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n()
 </script>

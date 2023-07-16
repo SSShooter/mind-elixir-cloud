@@ -12,9 +12,9 @@
         <li>实现组织结构图</li>
         <li>使用 electron 实现离线浏览</li>
       </ul> -->
-    <p class="list">{{ $t("about['1']") }}</p>
-    <p class="list">{{ $t("about['2']") }}</p>
-    <p class="list">{{ $t("about['3']") }}</p>
+    <p class="list">{{ t("about['1']") }}</p>
+    <p class="list">{{ t("about['2']") }}</p>
+    <p class="list">{{ t("about['3']") }}</p>
     <!-- <div class="donate">
       <span class="coffee">
         <span class="iconfont">&#xe608;</span> Donate
@@ -45,6 +45,9 @@
 // @ts-ignore
 import ReadMe from 'mind-elixir/readme.md'
 // import mdcn from 'mind-elixir/readme.cn.md?raw'
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n()
 </script>
 
 <style lang="less">
