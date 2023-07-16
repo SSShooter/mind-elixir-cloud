@@ -5,12 +5,15 @@
       <div
         class="mx-20 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
       >
-        <RouterLink v-for="map in mapList" :to="`/edit/${map._id}`">
+        <RouterLink
+          v-for="map in mapList"
+          :to="`/${isPublic ? 'share' : 'edit'}/${map._id}`"
+        >
           <MindMapCard
             class="h-full"
             :map="map"
             @delete="deleteMap(map)"
-            @download="download(map)"
+            @download="download(map, 'json')"
             @makePublic="makePublic(map)"
           />
         </RouterLink>
@@ -24,8 +27,9 @@
       </div>
     </template>
   </div>
-  <Teleport to=".navbar-end">
-    <CreateButton />
+  <Teleport to=".navbar-end" v-if="!isPublic">
+    <CreateButton v-if="userData" />
+    <LoginButton v-else />
   </Teleport>
   <Teleport to="body">
     <ConfirmModal
@@ -37,18 +41,27 @@
 </template>
 <script setup lang="ts">
 import CreateButton from '@/components/CreateButton.vue'
+import LoginButton from '@/components/LoginButton.vue'
 import MindMapCard from '@/components/MindMapCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import LoadingMask from '@/components/LoadingMask.vue'
 import ConfirmModal from '@/components/ConfirmModal.vue'
-import { reactive, ref, watch } from 'vue'
+import { reactive, ref, watch, inject, computed } from 'vue'
+import { User } from '@/models/user'
 import { MindMapList, MindMapItem } from '@/models/list'
-import { Response } from '@/models/response'
+import { ResponsePagination } from '@/models/response'
 import connect from '@/connect'
 import { useRoute } from 'vue-router'
+// @ts-ignore
+import { saveAs } from 'file-saver'
+// @ts-ignore
+import { data2Xmind } from '@mind-elixir/export-xmind'
+// @ts-ignore
+import { data2Html } from '@mind-elixir/export-html'
 
 const confirmModal = ref<InstanceType<typeof ConfirmModal> | null>(null)
 const route = useRoute()
+const isPublic = computed(() => route.params.type === 'public')
 const mapList = ref<MindMapList>([])
 const pagination = reactive({
   page: 1,
@@ -56,9 +69,10 @@ const pagination = reactive({
   total: 0,
 })
 const loading = ref(false)
+const userData = inject<undefined | User>('userData')
 const fetchList = async () => {
   loading.value = true
-  const res = await connect.get<never, Response<MindMapList>>(
+  const res = await connect.get<never, ResponsePagination<MindMapList>>(
     `/api/${route.params.type}`,
     {
       params: {
@@ -96,16 +110,18 @@ const makePublic = async (item: MindMapItem) => {
   })
   item.public = !item.public
 }
-const download = (item: MindMapItem) => {
-  // let blob = null
-  // const clone = JSON.parse(JSON.stringify(item.content))
-  // if (format === 'json') {
-  //   blob = new Blob([JSON.stringify(item)])
-  // } else if (format === 'html') {
-  //   blob = data2Html(clone)
-  // } else if (format === 'xmind') {
-  //   blob = await data2Xmind(clone)
-  // }
-  // saveAs(blob, `${item.name}.${format}`)
+const download = async (item: MindMapItem, format: string) => {
+  let blob = null
+  const clone = JSON.parse(JSON.stringify(item.content))
+  if (format === 'json') {
+    blob = new Blob([JSON.stringify(item)])
+  } else if (format === 'html') {
+    blob = data2Html(clone)
+  } else if (format === 'xmind') {
+    blob = await data2Xmind(clone)
+  } else {
+    return
+  }
+  saveAs(blob, `${item.name}.${format}`)
 }
 </script>

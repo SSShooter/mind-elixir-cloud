@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mind-elixir/export-html": "^2.0.0",
+    "@mind-elixir/export-xmind": "^2.0.0",
     "@mind-elixir/node-menu": "^1.0.3",
     "axios": "^1.4.0",
+    "file-saver": "^2.0.5",
     "mind-elixir": "^2.0.5",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

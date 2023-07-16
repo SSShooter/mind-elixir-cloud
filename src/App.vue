@@ -2,13 +2,16 @@
 import { onMounted } from 'vue'
 import NavBar from './components/NavBar.vue'
 import connect from '@/connect'
+import { ref, provide } from 'vue'
+import { User } from './models/user'
+import { Response } from './models/response'
 
+const userData = ref<undefined | User>(undefined)
+provide('userData', userData)
 onMounted(async () => {
-  const res = await connect.get('/api/user')
+  const res = await connect.get<never, Response<User>>('/api/user')
   if (res.data && res.data.id) {
-    // isLogined = true
-    // userData = res.data
-    console.log(res.data)
+    userData.value = res.data
   }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="about prose m-auto">
+  <div class="about prose m-auto mt-28">
     <!-- <div class="slogan">
       In one corner of the streaming mind, there appeared a blue beacon of
       inspiration
@@ -47,27 +47,33 @@ import ReadMe from 'mind-elixir/readme.md'
 // import mdcn from 'mind-elixir/readme.cn.md?raw'
 </script>
 
-<style lang="less" scoped>
-.slogan {
-  color: #3b5b82;
-  font-weight: bold;
-  margin-bottom: 25px;
-}
-.list {
-  margin: 20px 0;
-}
-.donate {
-  .coffee {
-    color: #ff5656;
-    font-size: 18px;
-    padding: 6px 10px;
+<style lang="less">
+.about {
+  a > img {
+    display: inline-block;
+    margin: 0 5px;
   }
-  a {
-    margin-left: 10px;
+  .slogan {
+    color: #3b5b82;
+    font-weight: bold;
+    margin-bottom: 25px;
   }
-  .el-button {
-    font-size: 16px;
-    padding: 6px 10px;
+  .list {
+    margin: 20px 0;
+  }
+  .donate {
+    .coffee {
+      color: #ff5656;
+      font-size: 18px;
+      padding: 6px 10px;
+    }
+    a {
+      margin-left: 10px;
+    }
+    .el-button {
+      font-size: 16px;
+      padding: 6px 10px;
+    }
   }
 }
 </style>
