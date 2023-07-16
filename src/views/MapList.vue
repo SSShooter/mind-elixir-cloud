@@ -28,8 +28,9 @@
     </template>
   </div>
   <Teleport to=".navbar-end" v-if="!isPublic">
-    <CreateButton v-if="userData" />
+    <LogoutButton v-if="userData" />
     <LoginButton v-else />
+    <!-- <CreateButton  /> -->
   </Teleport>
   <Teleport to="body">
     <ConfirmModal
@@ -40,8 +41,9 @@
   </Teleport>
 </template>
 <script setup lang="ts">
-import CreateButton from '@/components/CreateButton.vue'
+// import CreateButton from '@/components/CreateButton.vue'
 import LoginButton from '@/components/LoginButton.vue'
+import LogoutButton from '@/components/LogoutButton.vue'
 import MindMapCard from '@/components/MindMapCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import LoadingMask from '@/components/LoadingMask.vue'

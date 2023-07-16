@@ -1,12 +1,14 @@
 <template>
-  <button class="btn" @click="login">
+  <button class="btn" @click="logout">
     <GithubIcon />
-    Login
+    Logout
   </button>
 </template>
 <script setup lang="ts">
 import GithubIcon from '@/components/icons/GithubIcon.vue'
-const login = () => {
-  location.href = import.meta.env.VITE_OAUTH_URL
+import connect from '@/connect'
+
+const logout = async () => {
+  await connect.get('/logout')
 }
 </script>
