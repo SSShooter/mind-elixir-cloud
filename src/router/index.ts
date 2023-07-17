@@ -13,7 +13,9 @@ const routes = [
   { path: '/about', component: AboutPage },
 ]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHashHistory(),
   routes,
 })
+
+export default router

@@ -2,35 +2,48 @@
   <div class="mt-28">
     <LoadingMask class="pt-20" v-if="loading" />
     <template v-else>
-      <div
-        class="mx-20 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-      >
-        <RouterLink
-          v-for="map in mapList"
-          :to="`/${isPublic ? 'share' : 'edit'}/${map._id}`"
-        >
-          <MindMapCard
-            class="h-full"
-            :map="map"
-            @delete="deleteMap(map)"
-            @download="download(map, 'json')"
-            @makePublic="makePublic(map)"
-          />
-        </RouterLink>
+      <div v-if="!userData && !isPublic">
+        <div class="text-center text-2xl font-bold">
+          Please login to manage your mind maps
+        </div>
+        <div class="flex justify-center my-8">
+          <LoginButton />
+        </div>
       </div>
-      <div class="flex justify-center my-8">
-        <Pagination
-          v-model:page="pagination.page"
-          :page-size="pagination.pageSize"
-          :total="pagination.total"
-        />
+      <div v-else>
+        <div
+          class="mx-20 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        >
+          <!-- add -->
+          <CreateButton v-if="!isPublic" />
+          <RouterLink
+            v-for="map in mapList"
+            :to="`/${isPublic ? 'share' : 'edit'}/${map._id}`"
+          >
+            <MindMapCard
+              class="h-full"
+              :map="map"
+              :type="isPublic ? 'public' : 'private'"
+              @delete="deleteMap(map)"
+              @download="download(map, 'json')"
+              @makePublic="makePublic(map)"
+              @share="share(map)"
+            />
+          </RouterLink>
+        </div>
+        <div class="flex justify-center my-8">
+          <Pagination
+            v-model:page="pagination.page"
+            :page-size="pagination.pageSize"
+            :total="pagination.total"
+          />
+        </div>
       </div>
     </template>
   </div>
   <Teleport to=".navbar-end" v-if="!isPublic">
     <LogoutButton v-if="userData" />
     <LoginButton v-else />
-    <!-- <CreateButton  /> -->
   </Teleport>
   <Teleport to="body">
     <ConfirmModal
@@ -41,7 +54,7 @@
   </Teleport>
 </template>
 <script setup lang="ts">
-// import CreateButton from '@/components/CreateButton.vue'
+import CreateButton from '@/components/CreateButton.vue'
 import LoginButton from '@/components/LoginButton.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
 import MindMapCard from '@/components/MindMapCard.vue'
@@ -60,6 +73,7 @@ import { saveAs } from 'file-saver'
 import { data2Xmind } from '@mind-elixir/export-xmind'
 // @ts-ignore
 import { data2Html } from '@mind-elixir/export-html'
+import toast from '@/utils/toast'
 
 const confirmModal = ref<InstanceType<typeof ConfirmModal> | null>(null)
 const route = useRoute()
@@ -74,16 +88,21 @@ const loading = ref(false)
 const userData = inject<undefined | User>('userData')
 const fetchList = async () => {
   loading.value = true
-  const res = await connect.get<never, ResponsePagination<MindMapList>>(
-    `/api/${route.params.type}`,
-    {
+  const res = await connect
+    .get<never, ResponsePagination<MindMapList>>(`/api/${route.params.type}`, {
       params: {
         pageSize: pagination.pageSize,
         page: pagination.page,
       },
-    }
-  )
-  mapList.value = res.data
+    })
+    .catch(() => {
+      loading.value = false
+      throw new Error('fetch list failed')
+    })
+  mapList.value = res.data.map((item) => {
+    item.clone = JSON.parse(JSON.stringify(item)) as MindMapItem
+    return item
+  })
   pagination.total = res.total
   loading.value = false
 }
@@ -112,15 +131,19 @@ const makePublic = async (item: MindMapItem) => {
   })
   item.public = !item.public
 }
+const share = (item: MindMapItem) => {
+  const url = `${location.origin}/#/share/${item._id}`
+  navigator.clipboard.writeText(url)
+  toast.success('Copied to clipboard')
+}
 const download = async (item: MindMapItem, format: string) => {
   let blob = null
-  const clone = JSON.parse(JSON.stringify(item.content))
   if (format === 'json') {
-    blob = new Blob([JSON.stringify(item)])
+    blob = new Blob([JSON.stringify(item.clone)])
   } else if (format === 'html') {
-    blob = data2Html(clone)
+    blob = data2Html(item.clone)
   } else if (format === 'xmind') {
-    blob = await data2Xmind(clone)
+    blob = await data2Xmind(item.clone)
   } else {
     return
   }

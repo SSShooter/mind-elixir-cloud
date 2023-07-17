@@ -30,7 +30,7 @@ const messages = {
     about: {
       1: 'Thanks for the FREE service from netify and heroku.',
       2: 'Regularly Data Backup is recommended.',
-      3: 'If customization features is needed, please contact ssshooterx@gmail.com.',
+      3: `If customization features is needed, please contact ssshooterx{'@'}gmail.com.`,
     },
   },
   cn: {
@@ -94,7 +94,7 @@ const messages = {
     about: {
       1: 'Thanks for the FREE service from netify and heroku',
       2: 'Regularly Data Backup is recommended.',
-      3: 'If customization features is needed, please contact ssshooterx@gmail.com.',
+      3: `If customization features is needed, please contact ssshooterx{'@'}gmail.com.`,
     },
   },
 }
@@ -102,7 +102,8 @@ const i18n = createI18n({
   legacy: false,
   locale: 'en', // set locale
   fallbackLocale: 'en', // set fallback locale
-  messages, 
+  globalInjection: true,
+  messages,
 })
 
 export default i18n

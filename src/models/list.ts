@@ -10,6 +10,9 @@ export interface MindMapItem {
   updatedAt: string
   __v: number
   _id: string
+
+  // added by client
+  clone?: MindMapItem
 }
 
 export type MindMapList = MindMapItem[]

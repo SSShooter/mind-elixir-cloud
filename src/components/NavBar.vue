@@ -42,6 +42,7 @@
         </ul>
       </div>
       <router-link class="btn btn-ghost normal-case text-xl" to="/">
+        <img src="@/assets/logo2.png" class="h-full" />
         Mind Elixir
       </router-link>
     </div>

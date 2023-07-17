@@ -1,15 +1,15 @@
 <template>
   <div class="join">
     <button
-      class="join-item btn"
+      class="join-item btn btn-sm"
       :class="{ 'btn-disabled': page <= 1 }"
       @click="pre"
     >
       «
     </button>
-    <button class="join-item btn">{{ page }}</button>
+    <button class="join-item btn btn-sm">{{ page }}</button>
     <button
-      class="join-item btn"
+      class="join-item btn btn-sm"
       :class="{
         'btn-disabled': page >= Math.ceil(total / pageSize),
       }"

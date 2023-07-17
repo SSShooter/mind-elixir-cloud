@@ -1,8 +1,12 @@
 <template>
   <!-- Open the modal using ID.showModal() method -->
-  <button class="btn" @click="createModal?.showModal()">
-    {{ t('button.new') }}
-  </button>
+  <div
+    class="border rounded-2xl border-dashed flex justify-center items-center flex-col cursor-pointer"
+    @click="createModal?.showModal()"
+  >
+    <div class="font-extrabold">+</div>
+    <div>{{ t('button.new') }}</div>
+  </div>
   <Teleport to="body">
     <dialog ref="createModal" @keypress.enter.prevent class="modal">
       <form method="dialog" class="modal-box">

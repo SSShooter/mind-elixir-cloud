@@ -25,11 +25,14 @@
         class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
         @click.prevent
       >
-        <li @click="emit('makePublic')">
+        <li v-if="type === 'private'" @click="emit('makePublic')">
           <a>{{ map.public ? 'Make it private' : 'Make it public' }}</a>
         </li>
+        <li v-if="map.public" @click="emit('share')"><a>Share</a></li>
         <li @click="emit('download')"><a>Download</a></li>
-        <li @click="emit('delete')"><a>Delete</a></li>
+        <li v-if="type === 'private'" @click="emit('delete')">
+          <a class="bg-red-500 text-white">Delete</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -43,12 +46,14 @@ import { timeFormatter } from '@/utils'
 
 defineProps<{
   map: MindMapItem
+  type: 'public' | 'private'
 }>()
 
 const emit = defineEmits<{
   (e: 'delete'): void
   (e: 'download'): void
   (e: 'makePublic'): void
+  (e: 'share'): void
 }>()
 
 const options: Options = {

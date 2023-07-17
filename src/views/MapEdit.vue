@@ -6,6 +6,7 @@
     :options="options"
     class="h-screen"
   />
+  <div v-if="lastSavedTime" class="fixed bottom-6 left-6">Last saved time: {{ lastSavedTime }}</div>
   <Teleport to=".navbar-end">
     <button class="btn" @click="save">
       {{ t('button.save') }}
@@ -24,10 +25,12 @@ import nodeMenu from '@mind-elixir/node-menu'
 import '@mind-elixir/node-menu/dist/style.css'
 
 import { useI18n } from 'vue-i18n'
+import toast from '@/utils/toast'
 
 const { t } = useI18n()
 const plugins = [nodeMenu]
 const route = useRoute()
+const lastSavedTime = ref('')
 const meEl = ref<InstanceType<typeof MindElixirVue> | null>(null)
 const mapData = ref<MindElixirData | undefined>(undefined)
 const options: Options = {
@@ -52,5 +55,7 @@ const save = async () => {
     content: newData,
   })
   saving.value = false
+  lastSavedTime.value = new Date().toLocaleString()
+  toast.success('Saved')
 }
 </script>
