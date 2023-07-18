@@ -28,7 +28,7 @@ const messages = {
       signinWith: 'Sign in with',
     },
     about: {
-      1: 'Thanks for the FREE service from netify and heroku.',
+      1: 'Thanks for the FREE service from netify and fly.io.',
       2: 'Regularly Data Backup is recommended.',
       3: `If customization features is needed, please contact ssshooterx{'@'}gmail.com.`,
     },
@@ -60,9 +60,9 @@ const messages = {
       signinWith: '登陆方式',
     },
     about: {
-      1: '感谢 netify 和 heroku 提供的免费服务',
+      1: '感谢 netify 和 fly.io 提供的免费服务',
       2: '请注意数据备份，编辑好的思维导图请下载归档',
-      3: '接受定制功能，联系邮箱 ssshooterx@gmail.com',
+      3: `接受定制功能，联系邮箱 ssshooterx{'@'}gmail.com`,
     },
   },
   ja: {
@@ -92,7 +92,7 @@ const messages = {
       signinWith: 'ログイン方法',
     },
     about: {
-      1: 'Thanks for the FREE service from netify and heroku',
+      1: 'Thanks for the FREE service from netify and fly.io',
       2: 'Regularly Data Backup is recommended.',
       3: `If customization features is needed, please contact ssshooterx{'@'}gmail.com.`,
     },

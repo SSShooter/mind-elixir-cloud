@@ -29,9 +29,16 @@
           <a>{{ map.public ? 'Make it private' : 'Make it public' }}</a>
         </li>
         <li v-if="map.public" @click="emit('share')"><a>Share</a></li>
-        <li @click="emit('download')"><a>Download</a></li>
+        <li>
+          <a>Download</a>
+          <ul>
+            <li @click="emit('download', 'html')"><a>HTML</a></li>
+            <li @click="emit('download', 'xmind')"><a>Xmind</a></li>
+            <li @click="emit('download', 'json')"><a>JSON</a></li>
+          </ul>
+        </li>
         <li v-if="type === 'private'" @click="emit('delete')">
-          <a class="bg-red-500 text-white">Delete</a>
+          <a class="hover:bg-red-500 hover:text-white">Delete</a>
         </li>
       </ul>
     </div>
@@ -51,7 +58,7 @@ defineProps<{
 
 const emit = defineEmits<{
   (e: 'delete'): void
-  (e: 'download'): void
+  (e: 'download', type: string): void
   (e: 'makePublic'): void
   (e: 'share'): void
 }>()

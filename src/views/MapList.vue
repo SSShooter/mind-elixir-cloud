@@ -25,7 +25,7 @@
               :map="map"
               :type="isPublic ? 'public' : 'private'"
               @delete="deleteMap(map)"
-              @download="download(map, 'json')"
+              @download="(type) => download(map, type)"
               @makePublic="makePublic(map)"
               @share="share(map)"
             />
@@ -141,12 +141,13 @@ const download = async (item: MindMapItem, format: string) => {
   if (format === 'json') {
     blob = new Blob([JSON.stringify(item.clone)])
   } else if (format === 'html') {
-    blob = data2Html(item.clone)
+    blob = data2Html(item.clone?.content)
   } else if (format === 'xmind') {
-    blob = await data2Xmind(item.clone)
+    blob = await data2Xmind(item.clone?.content)
   } else {
     return
   }
   saveAs(blob, `${item.name}.${format}`)
+  toast.success('Downloading')
 }
 </script>

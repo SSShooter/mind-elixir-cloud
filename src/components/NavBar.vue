@@ -57,16 +57,16 @@
         <li>
           <router-link to="/about">{{ t('menu.about') }}</router-link>
         </li>
-        <!-- <li tabindex="0">
+        <li tabindex="0">
           <details>
-            <summary>Parent</summary>
+            <summary>i18n</summary>
             <ul class="p-2">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
+              <li v-for="locale in availableLocales" @click="changeLocale(locale)">
+                <a>{{ locale }}</a>
+              </li>
             </ul>
           </details>
         </li>
-        <li><a>Item 3</a></li> -->
       </ul>
     </div>
     <div class="navbar-end">
@@ -75,7 +75,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n()
+const { t, availableLocales, locale } = useI18n()
+console.log(availableLocales)
+
+const changeLocale = (newLocale: string) => {
+  console.log(newLocale)
+  locale.value = newLocale
+}
 </script>
