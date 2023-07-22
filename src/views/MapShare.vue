@@ -28,13 +28,13 @@ const options: Options = {
   draggable: false,
   editable: false,
   contextMenu: false,
-  toolBar: false,
+  toolBar: true,
   keypress: false,
 }
 const mapId = route.params.id
 onMounted(async () => {
   const res = await connect.get<never, { data: MindMapItem }>(
-    '/api/map/' + mapId
+    '/api/public/' + mapId
   )
   mapData.value = res.data.content
 })

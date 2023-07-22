@@ -1,11 +1,10 @@
 <template>
   <button class="btn" @click="login">
-    <GithubIcon />
+    <span class="iconfont icon-github-fill"></span>
     Login
   </button>
 </template>
 <script setup lang="ts">
-import GithubIcon from '@/components/icons/GithubIcon.vue'
 const login = () => {
   location.href = import.meta.env.VITE_OAUTH_URL
 }

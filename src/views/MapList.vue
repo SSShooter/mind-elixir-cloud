@@ -1,5 +1,6 @@
 <template>
   <div class="mt-28">
+    <!-- 4 conditions: loading/login/public/isListEmpty -->
     <LoadingMask class="pt-20" v-if="loading" />
     <template v-else>
       <div v-if="!userData && !isPublic">
@@ -12,10 +13,9 @@
       </div>
       <div v-else>
         <div
-          class="mx-20 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+          class="mx-20 grid gap-4 grid-cols-1 auto-rows-[208px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
         >
-          <!-- add -->
-          <CreateButton v-if="!isPublic" />
+          <CreateButton class="h-full" v-if="!isPublic" />
           <RouterLink
             v-for="map in mapList"
             :to="`/${isPublic ? 'share' : 'edit'}/${map._id}`"
@@ -40,6 +40,15 @@
         </div>
       </div>
     </template>
+    <!-- <div class="flex justify-center items-center" v-else>
+      <CreateButton v-if="!isPublic" />
+      <img
+        v-else
+        src="@/assets/create.svg"
+        class="h-[33vw]"
+        alt="Create Mindmap"
+      />
+    </div> -->
   </div>
   <Teleport to=".navbar-end" v-if="!isPublic">
     <LogoutButton v-if="userData" />
@@ -51,6 +60,7 @@
       title="Warning"
       content="Are you sure to delete this map?"
     />
+    <ShareModal ref="shareModal" />
   </Teleport>
 </template>
 <script setup lang="ts">
@@ -61,6 +71,7 @@ import MindMapCard from '@/components/MindMapCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import LoadingMask from '@/components/LoadingMask.vue'
 import ConfirmModal from '@/components/ConfirmModal.vue'
+import ShareModal from '@/components/ShareModal.vue'
 import { reactive, ref, watch, inject, computed } from 'vue'
 import { User } from '@/models/user'
 import { MindMapList, MindMapItem } from '@/models/list'
@@ -76,6 +87,7 @@ import { data2Html } from '@mind-elixir/export-html'
 import toast from '@/utils/toast'
 
 const confirmModal = ref<InstanceType<typeof ConfirmModal> | null>(null)
+const shareModal = ref<InstanceType<typeof ShareModal> | null>(null)
 const route = useRoute()
 const isPublic = computed(() => route.params.type === 'public')
 const mapList = ref<MindMapList>([])
@@ -131,10 +143,9 @@ const makePublic = async (item: MindMapItem) => {
   })
   item.public = !item.public
 }
-const share = (item: MindMapItem) => {
-  const url = `${location.origin}/#/share/${item._id}`
-  navigator.clipboard.writeText(url)
-  toast.success('Copied to clipboard')
+// TODO: share embed
+const share = (item: MindMapItem) => { 
+  shareModal.value?.show(item)
 }
 const download = async (item: MindMapItem, format: string) => {
   let blob = null

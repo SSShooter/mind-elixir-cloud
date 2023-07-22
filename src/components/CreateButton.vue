@@ -1,11 +1,11 @@
 <template>
   <!-- Open the modal using ID.showModal() method -->
   <div
-    class="border rounded-2xl border-dashed flex justify-center items-center flex-col cursor-pointer"
+    class="border rounded-2xl border-dashed hover:border-primary flex justify-center items-center flex-col cursor-pointer"
     @click="createModal?.showModal()"
   >
-    <div class="font-extrabold">+</div>
-    <div>{{ t('button.new') }}</div>
+    <img src="@/assets/create.svg" class="h-2/3" alt="Create Mindmap" />
+    <div><span class="font-extrabold">+</span> {{ t('button.new') }}</div>
   </div>
   <Teleport to="body">
     <dialog ref="createModal" @keypress.enter.prevent class="modal">

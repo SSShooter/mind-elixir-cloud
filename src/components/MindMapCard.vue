@@ -18,11 +18,10 @@
       <p>{{ timeFormatter(map.updatedAt || map.date) }}</p>
     </div>
     <div class="dropdown dropdown-end absolute right-2 top-2">
-      <!-- <label tabindex="0" class="btn m-1" @click.prevent>Click</label> -->
       <EllipsisButton @click.prevent />
       <ul
         tabindex="0"
-        class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+        class="dropdown-content z-[1] menu p-2 shadow rounded-box w-52"
         @click.prevent
       >
         <li v-if="type === 'private'" @click="emit('makePublic')">

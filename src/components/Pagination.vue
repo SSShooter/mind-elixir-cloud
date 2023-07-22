@@ -1,5 +1,5 @@
 <template>
-  <div class="join">
+  <div class="join" v-if="totalPage > 1">
     <button
       class="join-item btn btn-sm"
       :class="{ 'btn-disabled': page <= 1 }"
@@ -11,7 +11,7 @@
     <button
       class="join-item btn btn-sm"
       :class="{
-        'btn-disabled': page >= Math.ceil(total / pageSize),
+        'btn-disabled': page >= totalPage,
       }"
       @click="next"
     >
@@ -26,6 +26,7 @@ const props = defineProps<{
   pageSize: number
 }>()
 const emit = defineEmits(['update:page'])
+const totalPage = Math.ceil(props.total / props.pageSize)
 const pre = () => {
   emit('update:page', props.page - 1)
 }

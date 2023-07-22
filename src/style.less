@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.card {
+  @apply dark:border dark:border-gray-600;
+}
+
+.dropdown-content,
+.navbar,
+.menu ul {
+  @apply bg-base-100 dark:bg-base-200;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -11,4 +21,8 @@
 }
 .node-menu {
   @apply mt-20;
+}
+
+.iconfont {
+  font-size: 26px !important;
 }

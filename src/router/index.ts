@@ -4,6 +4,7 @@ import MapEdit from '@/views/MapEdit.vue'
 import MapShare from '@/views/MapShare.vue'
 import MapList from '@/views/MapList.vue'
 import AboutPage from '@/views/AboutPage.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 
 const routes = [
   { path: '/', component: HomePage },
@@ -11,6 +12,8 @@ const routes = [
   { path: '/list/:type', component: MapList },
   { path: '/share/:id', component: MapShare },
   { path: '/about', component: AboutPage },
+  { path: '/404', component: PageNotFound },
+  { path: '/:pathMatch(.*)*', component: PageNotFound },
 ]
 
 const router = createRouter({

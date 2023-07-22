@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import './style.less'
+import '@/icon/iconfont.css'
 import App from './App.vue'
 import router from './router'
 import i18n from './i18n'
