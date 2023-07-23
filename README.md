@@ -1,10 +1,13 @@
 # Mind Elixir Cloud
 
-- self deploy
-- i18n
-- light/dark theme
+- Self-hosted
+- I18n supported
+- Light/dark theme
 
-# img
+## Thanks
+
+### Image and icon
 
 - https://sketchvalley.com/
 - https://www.reshot.com/
+- https://www.iconfont.cn/
