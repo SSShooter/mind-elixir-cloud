@@ -28,9 +28,9 @@ const messages = {
       signinWith: 'Sign in with',
     },
     about: {
-      1: 'Thanks for the FREE service from netify and fly.io.',
+      1: 'Thank you for the free service provided by Netify and Fly.io.',
       2: 'Regularly Data Backup is recommended.',
-      3: `If customization features is needed, please contact ssshooterx{'@'}gmail.com.`,
+      3: `Should you require customization features, please reach out to ssshooterx{'@'}gmail.com.`,
     },
   },
   cn: {
@@ -92,9 +92,9 @@ const messages = {
       signinWith: 'ログイン方法',
     },
     about: {
-      1: 'Thanks for the FREE service from netify and fly.io',
+      1: 'Thank you for the free service provided by Netify and Fly.io.',
       2: 'Regularly Data Backup is recommended.',
-      3: `If customization features is needed, please contact ssshooterx{'@'}gmail.com.`,
+      3: `Should you require customization features, please reach out to ssshooterx{'@'}gmail.com.`,
     },
   },
 }

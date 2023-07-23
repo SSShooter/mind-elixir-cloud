@@ -49,7 +49,7 @@ const currentLink = computed(() => {
   return `${location.origin}/#/share/${currentItem.value?._id}`
 })
 const currentEmbed = computed(() => {
-  return `<iframe src="${currentLink.value}" frameborder="0" width="100%" height="100%"></iframe>`
+  return `<iframe src="${currentLink.value}" allowfullscreen="true" style="border:none" width="100%" height="600px"></iframe>`
 })
 const show = (item: MindMapItem) => {
   dialog.value?.showModal()
