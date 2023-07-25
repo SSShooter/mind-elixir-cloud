@@ -6,6 +6,6 @@
 </template>
 <script setup lang="ts">
 const login = () => {
-  location.href = import.meta.env.VITE_OAUTH_URL
+  location.href = import.meta.env.VITE_API_BASEURL + '/oauth/github/login'
 }
 </script>
