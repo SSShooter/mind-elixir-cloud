@@ -20,29 +20,34 @@
         </label>
         <ul
           tabindex="0"
-          class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52"
+          class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52"
         >
-          <li index="/demo">
-            <a>{{ t('menu.public') }}</a>
+          <li>
+            <router-link to="/list/public">{{ t('menu.public') }}</router-link>
           </li>
-          <li index="/folder">
-            <a>{{ t('menu.folder') }}</a>
+          <li>
+            <router-link to="/list/map">{{ t('menu.folder') }}</router-link>
           </li>
-          <li index="/about">
-            <a>{{ t('menu.about') }}</a>
+          <li>
+            <router-link to="/about">{{ t('menu.about') }}</router-link>
           </li>
-          <!-- <li>
-            <a>Parent</a>
-            <ul class="p-2">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
+          <li tabindex="0">
+            <details>
+              <summary>i18n</summary>
+              <ul class="p-2">
+                <li
+                  v-for="locale in availableLocales"
+                  @click="changeLocale(locale)"
+                >
+                  <a>{{ locale }}</a>
+                </li>
+              </ul>
+            </details>
           </li>
-          <li><a>Item 3</a></li> -->
         </ul>
       </div>
-      <router-link class="btn btn-ghost normal-case text-xl" to="/">
-        <img src="@/assets/logo2.png" class="h-full" />
+      <router-link class="btn btn-ghost normal-case text-xl !pl-0" to="/">
+        <img src="/logo2.png" class="h-full" />
         Mind Elixir
       </router-link>
     </div>
@@ -61,7 +66,10 @@
           <details>
             <summary>i18n</summary>
             <ul class="p-2">
-              <li v-for="locale in availableLocales" @click="changeLocale(locale)">
+              <li
+                v-for="locale in availableLocales"
+                @click="changeLocale(locale)"
+              >
                 <a>{{ locale }}</a>
               </li>
             </ul>
