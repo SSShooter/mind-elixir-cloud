@@ -9,6 +9,8 @@ const messages = {
       title: 'Title',
       ok: 'OK',
       cancel: 'Cancel',
+      login: 'Login',
+      share: 'Share',
     },
     menu: {
       public: 'Public',
@@ -41,6 +43,8 @@ const messages = {
       title: '标题',
       ok: '确定',
       cancel: '取消',
+      login: '登陆',
+      share: '分享',
     },
     menu: {
       public: '公开',
@@ -73,6 +77,8 @@ const messages = {
       title: 'タイトル',
       ok: 'OK',
       cancel: 'キャンセル',
+      login: 'ログイン',
+      share: '共有',
     },
     menu: {
       public: '公開',
