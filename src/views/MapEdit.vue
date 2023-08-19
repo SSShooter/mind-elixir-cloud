@@ -6,7 +6,7 @@
     :options="options"
     class="h-screen"
   />
-  <div v-if="isUnsaved" class="fixed bottom-9 left-6">Unsaved</div>
+  <div v-if="isUnsaved" class="fixed bottom-10 left-6">Unsaved</div>
   <div v-if="lastSavedTime" class="fixed bottom-6 left-6">
     Last saved time: {{ lastSavedTime }}
   </div>
@@ -62,6 +62,7 @@ const save = async () => {
     content: newData,
   })
   saving.value = false
+  isUnsaved.value = false
   lastSavedTime.value = new Date().toLocaleString()
   toast.success('Saved')
 }
