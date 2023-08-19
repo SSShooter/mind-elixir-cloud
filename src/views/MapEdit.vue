@@ -6,7 +6,10 @@
     :options="options"
     class="h-screen"
   />
-  <div v-if="lastSavedTime" class="fixed bottom-6 left-6">Last saved time: {{ lastSavedTime }}</div>
+  <div v-if="isUnsaved" class="fixed bottom-9 left-6">Unsaved</div>
+  <div v-if="lastSavedTime" class="fixed bottom-6 left-6">
+    Last saved time: {{ lastSavedTime }}
+  </div>
   <Teleport to=".navbar-end">
     <button class="btn" @click="save">
       {{ t('button.save') }}
@@ -31,6 +34,7 @@ const { t } = useI18n()
 const plugins = [nodeMenu]
 const route = useRoute()
 const lastSavedTime = ref('')
+const isUnsaved = ref(false)
 const meEl = ref<InstanceType<typeof MindElixirVue> | null>(null)
 const mapData = ref<MindElixirData | undefined>(undefined)
 const options: Options = {
@@ -43,11 +47,14 @@ onMounted(async () => {
     '/api/map/' + mapId
   )
   mapData.value = res.data.content
+  meEl.value?.instance?.bus.addListener('operation', () => {
+    isUnsaved.value = true
+  })
 })
 
 const saving = ref(false)
 const save = async () => {
-  if (saving.value === true) return
+  if (saving.value || !isUnsaved.value) return
   saving.value = true
   const newData = meEl.value?.instance?.getData() as MindElixirData
   await connect.patch('/api/map/' + mapId, {
