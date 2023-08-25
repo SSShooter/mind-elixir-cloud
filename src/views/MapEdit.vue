@@ -41,6 +41,7 @@ const mapData = ref<MindElixirData | undefined>(undefined)
 const options: Options = {
   el: '',
   direction: 2,
+  allowUndo: true,
 }
 const mapId = route.params.id
 onMounted(async () => {
@@ -50,6 +51,17 @@ onMounted(async () => {
   mapData.value = res.data.content
   meEl.value?.instance?.bus.addListener('operation', () => {
     isUnsaved.value = true
+  })
+  meEl.value?.instance?.map?.addEventListener('keydown', (e) => {
+    e.preventDefault()
+    console.log(e, e.target)
+    if (e.target !== e.currentTarget) {
+      // input
+      return
+    }
+    if(e.ctrlKey && e.key === 's') {
+      save()
+    }
   })
 })
 
