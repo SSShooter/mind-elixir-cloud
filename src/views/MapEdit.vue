@@ -6,8 +6,10 @@
     :options="options"
     class="h-screen"
   />
-  <div v-if="isUnsaved" class="fixed bottom-10 left-6">Unsaved</div>
-  <div v-if="lastSavedTime" class="fixed bottom-6 left-6">
+  <div v-if="isUnsaved" class="fixed bottom-10 left-6 dark:text-gray-200">
+    Unsaved
+  </div>
+  <div v-if="lastSavedTime" class="fixed bottom-6 left-6 dark:text-gray-200">
     Last saved time: {{ lastSavedTime }}
   </div>
   <Teleport to=".navbar-end">
@@ -56,6 +58,7 @@ const save = async () => {
   if (saving.value || !isUnsaved.value) return
   saving.value = true
   const newData = meEl.value?.instance?.getData() as MindElixirData
+  newData.theme = undefined
   await connect.patch('/api/map/' + mapId, {
     name: newData.nodeData.topic,
     content: newData,
