@@ -11,7 +11,7 @@
   "dependencies": {
     "@mind-elixir/export-html": "^3.0.0",
     "@mind-elixir/export-xmind": "^2.0.1",
-    "@mind-elixir/node-menu-neo": "^1.0.1",
+    "@mind-elixir/node-menu-neo": "^1.0.2",
     "axios": "^1.4.0",
     "file-saver": "^2.0.5",
     "mind-elixir": "^3.0.0",
