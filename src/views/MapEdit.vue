@@ -24,8 +24,7 @@ import { useRoute } from 'vue-router'
 import { MindElixirData, Options } from 'mind-elixir'
 import { MindMapItem } from '@/models/list'
 // @ts-ignore
-import nodeMenu from '@mind-elixir/node-menu'
-import '@mind-elixir/node-menu/dist/style.css'
+import nodeMenu from '@mind-elixir/node-menu-neo'
 
 import { useI18n } from 'vue-i18n'
 import toast from '@/utils/toast'
