@@ -6,7 +6,7 @@ const toast = createApp(Toast, {
   text: '',
   show: false,
 })
-
+console.log(toast, 'toast instance')
 const toastDom = toast.mount(document.createElement('div'))
 document.body.appendChild(toastDom.$el)
 const showToast = (type: string, text: string, duration: number) => {
