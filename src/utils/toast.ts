@@ -1,22 +1,21 @@
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import Toast from '@/components/Toast.vue'
 
-const toast = createApp(Toast, {
+const toast = createApp(Toast)
+const toastProps = reactive({
   type: 'success',
   text: '',
   show: false,
 })
-console.log(toast, 'toast instance')
+toast.provide('props', toastProps)
 const toastDom = toast.mount(document.createElement('div'))
 document.body.appendChild(toastDom.$el)
 const showToast = (type: string, text: string, duration: number) => {
-  if (!toast._instance) return
-  toast._instance.props.type = type
-  toast._instance.props.text = text
-  toast._instance.props.show = true
+  toastProps.type = type
+  toastProps.text = text
+  toastProps.show = true
   setTimeout(() => {
-    if (!toast._instance) return
-    toast._instance.props.show = false
+    toastProps.show = false
   }, duration)
 }
 

@@ -1,13 +1,13 @@
 <template>
   <Transition name="up">
     <!-- wrapper -->
-    <div v-show="props.show" class="fixed w-full bottom-0 pointer-events-none">
+    <div v-show="props?.show" class="fixed w-full bottom-0 pointer-events-none">
       <div
         class="m-auto flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
         role="alert"
       >
         <div
-          v-if="props.type === 'success'"
+          v-if="props?.type === 'success'"
           class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200"
         >
           <svg
@@ -24,7 +24,7 @@
           <span class="sr-only">Check icon</span>
         </div>
         <div
-          v-else-if="props.type === 'error'"
+          v-else-if="props?.type === 'error'"
           class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200"
         >
           <svg
@@ -41,7 +41,7 @@
           <span class="sr-only">Error icon</span>
         </div>
         <div
-          v-else-if="props.type === 'warning'"
+          v-else-if="props?.type === 'warning'"
           class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200"
         >
           <svg
@@ -57,17 +57,20 @@
           </svg>
           <span class="sr-only">Warning icon</span>
         </div>
-        <div class="ml-3 text-sm font-normal">{{ props.text }}</div>
+        <div class="ml-3 text-sm font-normal">{{ props?.text }}</div>
       </div>
     </div>
   </Transition>
 </template>
 <script setup lang="ts">
-const props = defineProps<{
+import { inject } from 'vue';
+
+const props = inject<{
   text: string
   show: boolean
   type: 'success' | 'error' | 'warning'
-}>()
+}>('props')
+console.log(props)
 </script>
 <style scoped>
 .up-enter-active,
