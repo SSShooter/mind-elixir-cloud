@@ -36,6 +36,7 @@ const plugins = [nodeMenu]
 const route = useRoute()
 const lastSavedTime = ref('')
 const isUnsaved = ref(false)
+const saving = ref(false)
 const meEl = ref<InstanceType<typeof MindElixirVue> | null>(null)
 const mapData = ref<MindElixirData | undefined>(undefined)
 const options: Options = {
@@ -54,7 +55,6 @@ onMounted(async () => {
   })
   meEl.value?.instance?.map?.addEventListener('keydown', (e) => {
     e.preventDefault()
-    console.log(e, e.target)
     if (e.target !== e.currentTarget) {
       // input
       return
@@ -65,7 +65,6 @@ onMounted(async () => {
   })
 })
 
-const saving = ref(false)
 const save = async () => {
   if (saving.value || !isUnsaved.value) return
   saving.value = true
