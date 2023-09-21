@@ -93,7 +93,7 @@ const isPublic = computed(() => route.params.type === 'public')
 const mapList = ref<MindMapList>([])
 const pagination = reactive({
   page: 1,
-  pageSize: 10,
+  pageSize: isPublic.value ? 10 : 9,
   total: 0,
 })
 const loading = ref(false)
@@ -111,10 +111,11 @@ const fetchList = async () => {
       loading.value = false
       throw new Error('fetch list failed')
     })
-  mapList.value = res.data?.map((item) => {
-    item.clone = JSON.parse(JSON.stringify(item)) as MindMapItem
-    return item
-  }) || []
+  mapList.value =
+    res.data?.map((item) => {
+      item.clone = JSON.parse(JSON.stringify(item)) as MindMapItem
+      return item
+    }) || []
   pagination.total = res.total
   loading.value = false
 }
@@ -143,8 +144,7 @@ const makePublic = async (item: MindMapItem) => {
   })
   item.public = !item.public
 }
-// TODO: share embed
-const share = (item: MindMapItem) => { 
+const share = (item: MindMapItem) => {
   shareModal.value?.show(item)
 }
 const download = async (item: MindMapItem, format: string) => {

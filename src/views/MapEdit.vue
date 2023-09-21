@@ -14,6 +14,7 @@
   </div>
   <Teleport to=".navbar-end">
     <button class="btn" @click="save">
+      <span v-if="saving" class="loading loading-spinner"></span>
       {{ t('button.save') }}
     </button>
   </Teleport>
@@ -59,7 +60,7 @@ onMounted(async () => {
       // input
       return
     }
-    if(e.ctrlKey && e.key === 's') {
+    if (e.ctrlKey && e.key === 's') {
       save()
     }
   })
