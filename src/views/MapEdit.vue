@@ -23,7 +23,7 @@
 import MindElixirVue from '@/components/MindElixirVue.vue'
 import { onMounted, ref } from 'vue'
 import connect from '@/connect'
-import { useRoute } from 'vue-router'
+import { onBeforeRouteLeave, useRoute } from 'vue-router'
 import { MindElixirData, Options } from 'mind-elixir'
 import { MindMapItem } from '@/models/list'
 // @ts-ignore
@@ -80,4 +80,17 @@ const save = async () => {
   lastSavedTime.value = new Date().toLocaleString()
   toast.success('Saved')
 }
+
+window.onbeforeunload = () => {
+  return isUnsaved.value ? true : null
+}
+
+onBeforeRouteLeave((_to, _from, next) => {
+  if (isUnsaved.value) {
+    console.log('You are leaving, but you have unsaved changes')
+    next()
+  } else {
+    next()
+  }
+})
 </script>
