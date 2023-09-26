@@ -86,6 +86,7 @@ window.onbeforeunload = () => {
 }
 
 onBeforeRouteLeave((_to, _from, next) => {
+  window.onbeforeunload = null
   if (isUnsaved.value) {
     console.log('You are leaving, but you have unsaved changes')
     next()
