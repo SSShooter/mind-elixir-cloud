@@ -16,7 +16,6 @@
           <button class="btn btn-circle" @click="shareToWeibo">
             <span class="iconfont cursor-pointer icon-weibo"></span>
           </button>
-
           <button class="btn btn-circle" @click="copyLink">
             <span class="iconfont cursor-pointer icon-link"></span>
           </button>
