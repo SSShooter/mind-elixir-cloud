@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4177535 */
-  src: url('iconfont.woff2?t=1690350369584') format('woff2'),
-       url('iconfont.woff?t=1690350369584') format('woff'),
-       url('iconfont.ttf?t=1690350369584') format('truetype');
+  src: url('iconfont.woff2?t=1695973049779') format('woff2'),
+       url('iconfont.woff?t=1695973049779') format('woff'),
+       url('iconfont.ttf?t=1695973049779') format('truetype');
 }
 
 .iconfont {
@@ -13,16 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-linkedin:before {
+  content: "\e890";
+}
+
 .icon-google:before {
   content: "\e87a";
 }
 
 .icon-link:before {
   content: "\e7e2";
-}
-
-.icon-linkedin:before {
-  content: "\e87d";
 }
 
 .icon-facebook:before {
