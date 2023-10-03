@@ -10,10 +10,10 @@
   "dependencies": {
     "@mind-elixir/export-html": "^3.0.0",
     "@mind-elixir/export-xmind": "^2.0.1",
-    "@mind-elixir/node-menu-neo": "^1.0.2",
+    "@mind-elixir/node-menu-neo": "^1.0.3",
     "axios": "^1.4.0",
     "file-saver": "^2.0.5",
-    "mind-elixir": "^3.2.1",
+    "mind-elixir": "^3.3.2",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
