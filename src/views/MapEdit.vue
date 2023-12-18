@@ -88,8 +88,14 @@ window.onbeforeunload = () => {
 onBeforeRouteLeave((_to, _from, next) => {
   window.onbeforeunload = null
   if (isUnsaved.value) {
-    console.log('You are leaving, but you have unsaved changes')
-    next()
+    const answer = window.confirm(
+      'Do you really want to leave? you have unsaved changes!'
+    )
+    if (answer) {
+      next()
+    } else {
+      next(false)
+    }
   } else {
     next()
   }

@@ -1,5 +1,6 @@
 <template>
   <div class="mt-28">
+    <SearchBar class="mb-5" @search="handleSearch" />
     <!-- 4 conditions: loading/login/public/isListEmpty -->
     <LoadingMask class="pt-20" v-if="loading" />
     <template v-else>
@@ -34,6 +35,7 @@
         <div class="flex justify-center my-8">
           <Pagination
             v-model:page="pagination.page"
+            @update:page="fetchList"
             :page-size="pagination.pageSize"
             :total="pagination.total"
           />
@@ -85,6 +87,7 @@ import { data2Xmind } from '@mind-elixir/export-xmind'
 // @ts-ignore
 import { data2Html } from '@mind-elixir/export-html'
 import toast from '@/utils/toast'
+import SearchBar from '@/components/SearchBar.vue'
 
 const confirmModal = ref<InstanceType<typeof ConfirmModal> | null>(null)
 const shareModal = ref<InstanceType<typeof ShareModal> | null>(null)
@@ -96,6 +99,7 @@ const pagination = reactive({
   pageSize: isPublic.value ? 10 : 9,
   total: 0,
 })
+const keyword = ref('')
 const loading = ref(false)
 const userData = inject<undefined | User>('userData')
 const fetchList = async () => {
@@ -105,6 +109,7 @@ const fetchList = async () => {
       params: {
         pageSize: pagination.pageSize,
         page: pagination.page,
+        name: keyword.value,
       },
     })
     .catch(() => {
@@ -122,17 +127,17 @@ const fetchList = async () => {
 watch(
   () => route.params.type,
   async () => {
+    keyword.value = ''
     pagination.page = 1
     fetchList()
   },
   { immediate: true }
 )
-watch(
-  () => pagination.page,
-  async () => {
-    fetchList()
-  }
-)
+const handleSearch = (val: string) => {
+  keyword.value = val
+  pagination.page = 1
+  fetchList()
+}
 const deleteMap = async (item: MindMapItem) => {
   await confirmModal.value?.confirm()
   await connect.delete('/api/map/' + item._id)
