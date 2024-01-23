@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
 import MindElixir from 'mind-elixir'
 import type { MindElixirData, MindElixirInstance, Options } from 'mind-elixir'
 import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
@@ -44,10 +45,25 @@ onUnmounted(() => {
   mediaQuery.removeEventListener('change', changeTheme)
 })
 
+const sanitizeNodeData = (nodeData: MindElixirData['nodeData']) => {
+  if (!nodeData) return
+  if (nodeData.dangerouslySetInnerHTML) {
+    nodeData.dangerouslySetInnerHTML = DOMPurify.sanitize(
+      nodeData.dangerouslySetInnerHTML
+    )
+  }
+  if (nodeData.children) {
+    for (const child of nodeData.children) {
+      sanitizeNodeData(child)
+    }
+  }
+}
+
 let isInit = false
 watchEffect(() => {
   if (!props.data || !me.value) return
   if (!isInit) {
+    sanitizeNodeData(props.data.nodeData)
     me.value.init(props.data)
     me.value.map.style.opacity = '1'
     isInit = true
