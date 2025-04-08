@@ -5,6 +5,7 @@ import MapShare from '@/views/MapShare.vue'
 import MapList from '@/views/MapList.vue'
 import AboutPage from '@/views/AboutPage.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
+import DesktopLogin from '@/views/DesktopLogin.vue'
 
 const routes = [
   { path: '/', component: HomePage },
@@ -12,6 +13,7 @@ const routes = [
   { path: '/list/:type', component: MapList },
   { path: '/share/:id', component: MapShare },
   { path: '/about', component: AboutPage },
+  { path: '/desktop', component: DesktopLogin },
   { path: '/404', component: PageNotFound },
   { path: '/:pathMatch(.*)*', component: PageNotFound },
 ]
