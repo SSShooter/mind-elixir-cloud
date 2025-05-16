@@ -10,7 +10,7 @@ const userData = ref<undefined | User>(undefined)
 provide('userData', userData)
 onMounted(async () => {
   const res = await connect.get<never, Response<User>>('/api/user')
-  if (res.data && res.data.id) {
+  if (res.data && res.data.providerAccountId) {
     userData.value = res.data
   }
 })
