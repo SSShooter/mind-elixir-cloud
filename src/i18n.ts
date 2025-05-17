@@ -11,6 +11,7 @@ const messages = {
       cancel: 'Cancel',
       login: 'Login',
       share: 'Share',
+      loggingIn: 'Logging in...',
     },
     menu: {
       public: 'Public',
@@ -45,6 +46,7 @@ const messages = {
       cancel: '取消',
       login: '登陆',
       share: '分享',
+      loggingIn: '正在唤起登录……',
     },
     menu: {
       public: '公开',
@@ -79,6 +81,7 @@ const messages = {
       cancel: 'キャンセル',
       login: 'ログイン',
       share: '共有',
+      loggingIn: 'ログイン中...',
     },
     menu: {
       public: '公開',
