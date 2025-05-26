@@ -91,5 +91,6 @@ console.log(availableLocales)
 const changeLocale = (newLocale: string) => {
   console.log(newLocale)
   locale.value = newLocale
+   localStorage.setItem('lang',newLocale)
 }
 </script>
